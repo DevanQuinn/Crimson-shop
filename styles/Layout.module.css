@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+
+.title {
+	font-family: 'Squada One', Georgia, serif;
+	font-size: 32px;
+	color: crimson;
+	transition: all 0.2s ease;
+}
+
+.title h1 {
+	margin: 0;
+}
+
+.title:hover {
+	transform: scale(1.1);
+}
+
+.nav {
+	position: relative;
+	margin-bottom: 50px;
+	display: grid;
+	grid-template-columns: 4fr 1fr 2fr 1fr 4fr;
+	text-align: center;
+	align-items: center;
+	color: white;
+	background-color: rgb(39, 39, 39);
+	gap: 0 50px;
+}
+
+.nav a,
+.title {
+	padding: 10px;
+}
+
+.children {
+	margin-top: 100px;
+}
+
+.hr {
+	border: none;
+	outline: none;
+}
+
+.link:hover {
+	text-decoration: underline;
+}

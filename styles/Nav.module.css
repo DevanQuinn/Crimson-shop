@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+
+.title {
+	font-family: 'Squada One', Georgia, serif;
+	font-size: 32px;
+	color: crimson;
+}
+
+.nav {
+	outline: 3px solid black;
+	position: sticky;
+	display: grid;
+	grid-template-columns: 4fr 1fr 3fr 1fr 4fr;
+	text-align: center;
+	align-items: center;
+	color: white;
+	background-color: rgb(39, 39, 39);
+}
+
+.hr {
+	border: none;
+	outline: none;
+}
