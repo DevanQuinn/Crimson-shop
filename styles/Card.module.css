@@ -1,13 +1,60 @@
 .grid {
 	display: grid;
 	width: 100%;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	gap: 50px 0;
+	margin-left: 10%;
 }
 
 .card-bkg {
+	position: relative;
+	display: flex;
+	flex-flow: column nowrap;
 	background-color: rgb(211, 211, 211);
-	border-radius: 15px;
-	height: 500px;
-	width: 350px;
+	height: 250px;
+	width: 200px;
+}
+
+.info {
+	z-index: 1;
+	background-color: rgba(49, 49, 49, 0.75);
+	color: white;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	transition: all 0.2s ease;
+}
+
+.hover {
+	opacity: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(220, 20, 60, 0.75);
+	z-index: 5;
+	position: absolute;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	gap: 50px;
+	transition: all 0.2s ease;
+}
+
+.hover button {
+	width: 50%;
+	height: 20%;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	font-family: var(--squada-font);
+	cursor: pointer;
+}
+
+.card-bkg:hover > .hover {
+	opacity: 1;
+}
+
+.card-bkg:hover > .info {
+	opacity: 0;
 }

@@ -13,6 +13,7 @@ const Nav = ({ styles }): JSX.Element => {
 			<Link href='/'>
 				<a className={styles.title}>
 					<h1>CRIMSON</h1>
+					<h6>ATHLETICS</h6>
 				</a>
 			</Link>
 			<Link href='/about'>

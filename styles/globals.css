@@ -1,5 +1,8 @@
 :root {
 	--background-color: rgb(39, 39, 39);
+	--font-default: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	--squada-font: 'Squada One', Georgia, serif;
 }
 
 html,
@@ -17,4 +20,10 @@ a {
 
 * {
 	box-sizing: border-box;
+}
+
+.heading-title {
+	border-bottom: 1px solid black;
+	padding-bottom: 10px;
+	text-align: center;
 }

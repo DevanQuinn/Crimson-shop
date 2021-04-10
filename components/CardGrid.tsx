@@ -1,13 +1,12 @@
 import styles from '../styles/Card.module.css';
 import Card from './Card';
 
-const CardGrid = (): JSX.Element => {
+const CardGrid = ({ products }): JSX.Element => {
 	return (
 		<div className={styles.grid}>
-			<Card />
-			<Card />
-			<Card />
-			<Card />
+			{products.map((item, idx) => {
+				return <Card product={item} key={idx} />;
+			})}
 		</div>
 	);
 };

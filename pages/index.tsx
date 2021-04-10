@@ -1,9 +1,9 @@
-import Card from '../components/CardGrid';
+import CardGrid from '../components/CardGrid';
 
 const Home = (): JSX.Element => {
 	return (
 		<>
-			<Card />
+			<h1 className='heading-title'>Crimson Athletics Home</h1>
 		</>
 	);
 };

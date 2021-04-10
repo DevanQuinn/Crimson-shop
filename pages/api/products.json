@@ -1,0 +1,44 @@
+{
+	"products": {
+		"1": {
+			"name": "Gymshark shirt idk",
+			"desc": "The best gymshark shirt ever!!!",
+			"price": "30",
+			"img": "gymshark1.jpg",
+			"sizes": [
+				{ "name": "Small", "value": "small", "available": true },
+				{ "name": "Medium", "value": "medium", "available": false },
+				{ "name": "Large", "value": "large", "available": true },
+				{ "name": "Extra-Large", "value": "xl", "available": true }
+			]
+		},
+		"2": {
+			"name": "SOLD OUT ITEM",
+			"desc": "Soooo good. too bad it's sold out tho",
+			"price": "0.99",
+			"img": "gymshark1.jpg",
+			"sizes": [
+				{ "name": "Small", "value": "small", "available": false },
+				{ "name": "Medium", "value": "medium", "available": false },
+				{ "name": "Large", "value": "large", "available": false },
+				{ "name": "Extra-Large", "value": "xl", "available": false }
+			]
+		}
+	},
+	"catalog": [
+		{
+			"id": "1",
+			"name": "Gymshark shirt idk",
+			"price": "30",
+			"available": true,
+			"img": "gymshark1.jpg"
+		},
+		{
+			"id": "2",
+			"name": "SOLD OUT ITEM",
+			"price": "0.99",
+			"available": false,
+			"img": "gymshark1.jpg"
+		}
+	]
+}
