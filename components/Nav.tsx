@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 const Nav = ({ styles }): JSX.Element => {
 	return (
@@ -19,7 +20,9 @@ const Nav = ({ styles }): JSX.Element => {
 					<h3>About</h3>
 				</a>
 			</Link>
-			<hr className={styles.hr} />
+			<button className={styles.button}>
+				<LocalMallIcon />
+			</button>
 		</nav>
 	);
 };
