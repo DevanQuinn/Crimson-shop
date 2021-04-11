@@ -2,26 +2,34 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import styles from '../../../styles/Product.module.css';
+import useInStock from '../../../hooks/useInStock';
+import Popup from '../../../components/UI/Popup';
 
 const product = ({ product }): JSX.Element => {
 	const router = useRouter();
 	const { id } = router.query;
-	const checkInStock = () => {
-		const outOfStockItems = product.sizes.filter(size => size.available);
-		return outOfStockItems.length !== 0;
+	const [inStock] = useInStock(product);
+	const [selectedSize, setSelectedSize] = useState('none');
+	const [popupOpen, setPopupOpen] = useState(false);
+	const showPopup = () => {
+		setPopupOpen(true);
 	};
-	const [inStock, setInStock] = useState(checkInStock);
-	const [addToCart, setAddToCart] = useState();
-	useEffect(() => {
-		let cartElement;
-		if (inStock) cartElement = <button>Add to cart</button>;
-		else cartElement = <button disabled>Sold out</button>;
-		setAddToCart(cartElement);
-	}, [inStock]);
+	const cartElement = (
+		<button disabled={selectedSize === 'none' || !inStock} onClick={showPopup}>
+			{inStock ? 'Add to cart' : 'Sold out'}
+		</button>
+	);
+	useEffect(() => console.log(selectedSize), [selectedSize]);
 
 	if (!product) return <h1>Product Not Found</h1>;
 	return (
 		<div className={styles.wrapper}>
+			<Popup
+				info={{ message: 'Added to cart' }}
+				open={popupOpen}
+				autoClose={5000}
+				onClose={() => setPopupOpen(false)}
+			/>
 			<Image
 				width='300'
 				height='300'
@@ -33,7 +41,12 @@ const product = ({ product }): JSX.Element => {
 				<h2 className={styles.price}>${product.price}</h2>
 				<hr />
 				<div>
-					<select name='size' disabled={!inStock} defaultValue='none'>
+					<select
+						name='size'
+						disabled={!inStock}
+						defaultValue='none'
+						onChange={e => setSelectedSize(e.target.value)}
+					>
 						<option value='none'>Select Size</option>
 						{product.sizes.map((size, idx) => {
 							const isAvailable = size.available;
@@ -45,7 +58,7 @@ const product = ({ product }): JSX.Element => {
 						})}
 					</select>
 				</div>
-				{addToCart}
+				{cartElement}
 				<p>{product.desc}</p>
 			</div>
 		</div>

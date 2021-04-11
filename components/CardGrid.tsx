@@ -5,7 +5,7 @@ const CardGrid = ({ products }): JSX.Element => {
 	return (
 		<div className={styles.grid}>
 			{products.map((item, idx) => {
-				return <Card product={item} key={idx} />;
+				return <Card product={item} index={idx} key={idx} />;
 			})}
 		</div>
 	);

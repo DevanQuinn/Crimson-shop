@@ -42,6 +42,9 @@
 
 .left-column button:disabled {
 	pointer-events: none;
+	border: 3px solid var(--background-color);
+	background-color: white;
+	color: crimson;
 }
 
 .left-column h1,
