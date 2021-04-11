@@ -5,7 +5,7 @@ import styles from '../../../styles/Product.module.css';
 import useInStock from '../../../hooks/useInStock';
 import Popup from '../../../components/UI/Popup';
 
-const product = ({ product }): JSX.Element => {
+const item = ({ product }): JSX.Element => {
 	const router = useRouter();
 	const { id } = router.query;
 	const [inStock] = useInStock(product);
@@ -65,7 +65,8 @@ const product = ({ product }): JSX.Element => {
 	);
 };
 
-export default product;
+export default item;
+
 export const getServerSideProps = async context => {
 	const res = await fetch(
 		`http://localhost:3000/api/products/${context.params.id}`
