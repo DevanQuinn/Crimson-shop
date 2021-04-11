@@ -1,5 +1,3 @@
-import CardGrid from '../components/CardGrid';
-
 const Home = (): JSX.Element => {
 	return (
 		<>
