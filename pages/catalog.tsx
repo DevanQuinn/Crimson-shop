@@ -1,4 +1,5 @@
 import CardGrid from '../components/CardGrid';
+import server from '../server';
 
 const Catalog = ({ products }): JSX.Element => {
 	console.log(products);
@@ -12,8 +13,8 @@ const Catalog = ({ products }): JSX.Element => {
 
 export default Catalog;
 
-export const getServerSideProps = async () => {
-	const res = await fetch('http://localhost:3000/api/products');
+export const getStaticProps = async () => {
+	const res = await fetch(server + '/api/products');
 	const catalog = await res.json();
 	return { props: { products: catalog } };
 };

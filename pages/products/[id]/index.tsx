@@ -4,6 +4,8 @@ import Image from 'next/image';
 import styles from '../../../styles/Product.module.css';
 import useInStock from '../../../hooks/useInStock';
 import Popup from '../../../components/UI/Popup';
+import server from '../../../server';
+import { GetStaticProps } from 'next';
 
 const item = ({ product }): JSX.Element => {
 	const router = useRouter();
@@ -21,7 +23,6 @@ const item = ({ product }): JSX.Element => {
 	);
 	useEffect(() => console.log(selectedSize), [selectedSize]);
 
-	if (!product) return <h1>Product Not Found</h1>;
 	return (
 		<div className={styles.wrapper}>
 			<Popup
@@ -65,14 +66,26 @@ const item = ({ product }): JSX.Element => {
 	);
 };
 
-export default item;
-
-export const getServerSideProps = async context => {
-	const res = await fetch(
-		`http://localhost:3000/api/products/${context.params.id}`
-	);
-	if (res.status !== 200) return { props: { product: null } };
+export const getStaticProps: GetStaticProps = async context => {
+	const res = await fetch(`${server}/api/products/${context.params.id}`);
+	if (res.status !== 200) return { notFound: true };
 	const product = await res.json();
 
 	return { props: { product } };
 };
+
+export const getStaticPaths = async () => {
+	const res = await fetch(`${server}/api/products`);
+	const products = await res.json();
+
+	const ids = products.map((_item, idx) => idx + 1);
+	const paths = ids.map(id => {
+		return {
+			params: { id: id.toString() },
+		};
+	});
+
+	return { paths, fallback: false };
+};
+
+export default item;
