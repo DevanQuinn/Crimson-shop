@@ -71,9 +71,7 @@
 	.grid {
 		display: flex;
 		flex-flow: column wrap;
-		justify-content: flex-start;
-		align-items: flex-start;
-		overflow: scroll;
+		align-items: center;
 	}
 
 	.card-bkg {
