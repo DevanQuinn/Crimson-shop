@@ -4,7 +4,7 @@
 	font-family: 'Squada One', Georgia, serif;
 	font-size: 32px;
 	color: crimson;
-	transition: all 0.2s ease;
+	transition: transform 0.2s ease;
 	padding: 0;
 	border: none;
 }
@@ -15,10 +15,11 @@
 
 .title h6 {
 	color: rgb(133, 133, 133);
-	text-align: right;
+	text-align: center;
 	margin: 0;
 	font-size: 18px;
 	letter-spacing: 0.6rem;
+	text-indent: 0.6rem;
 }
 
 .title:hover {
@@ -27,14 +28,12 @@
 
 .nav {
 	position: relative;
-	margin-bottom: 50px;
 	display: grid;
 	grid-template-columns: 4fr 1fr 2fr 1fr 4fr;
 	text-align: center;
 	align-items: center;
 	/* color: var(--background-color); */
 	background-color: var(--background-color);
-	gap: 0 50px;
 	box-shadow: 1px 1px 10px black;
 }
 
@@ -43,8 +42,11 @@
 	padding: 10px;
 }
 
-.children {
-	margin-top: 100px;
+.cart-count {
+	font-weight: bold;
+	display: inline;
+	vertical-align: text-top;
+	line-height: 12px;
 }
 
 .hr {
@@ -91,4 +93,36 @@
 	margin-left: 10px;
 	font-size: 12px;
 	display: inline-block;
+}
+
+@media only screen and (max-width: 1024px) {
+	.nav {
+		position: fixed;
+		z-index: 5;
+		top: 0;
+		height: 12%;
+		width: 100%;
+		text-align: center;
+		margin: 0;
+		grid-template-columns: 2fr 1fr 2fr;
+		gap: 0;
+	}
+
+	.children {
+		margin-top: 125px;
+	}
+
+	.link {
+		display: none;
+	}
+
+	.title h6 {
+		text-align: center;
+	}
+
+	.footer {
+		width: 100%;
+		bottom: 0;
+		font-size: 0.75em;
+	}
 }

@@ -10,7 +10,7 @@ const Layout = ({ children }): JSX.Element => {
 				<title>Crimson Athletics</title>
 			</Head>
 			<Nav styles={styles} />
-			{children}
+			<div className={styles.children}>{children}</div>
 			<Footer styles={styles} />
 		</>
 	);

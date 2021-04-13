@@ -24,6 +24,9 @@ const Nav = ({ styles }): JSX.Element => {
 			<div className={styles.button}>
 				<div className='snipcart-checkout'>
 					<LocalMallIcon />
+					<div className={styles['cart-count']}>
+						<span className='snipcart-items-count' />
+					</div>
 				</div>
 			</div>
 		</nav>

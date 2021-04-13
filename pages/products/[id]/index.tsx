@@ -17,6 +17,7 @@ const item = ({ product }): JSX.Element => {
 	const showPopup = () => {
 		setPopupOpen(true);
 	};
+
 	const getCartSizes = () => {
 		const sizes = product.sizes.map(size => {
 			if (size.available) return size.name.toString();
@@ -24,47 +25,48 @@ const item = ({ product }): JSX.Element => {
 		const filteredSizes = sizes.filter(size => size);
 		return filteredSizes.join('|');
 	};
-	const [cartSizes, setCartSizes] = useState(getCartSizes);
 	const cartInfo = {
 		info: { id, product },
-		optional: { name: 'Size', options: cartSizes, selectedSize },
+		optional: {
+			name: 'Size',
+			options: getCartSizes(),
+		},
 	};
 	const cartElement = inStock ? (
-		<AddToCart
-			info={cartInfo.info}
-			optional={cartInfo.optional}
-			inStock={selectedSize !== 'none' && inStock}
-		/>
+		<AddToCart info={cartInfo.info} optional={cartInfo.optional} inStock />
 	) : (
 		<button disabled>Sold out</button>
 	);
 
 	return (
 		<div className={styles.wrapper}>
-			<Popup
+			{/* <Popup
 				info={{ message: 'Added to cart' }}
 				open={popupOpen}
 				autoClose={5000}
 				onClose={() => setPopupOpen(false)}
-			/>
-			<Image
-				width='300'
-				height='300'
-				src={`/img/${product.img}`}
-				alt={`image product id ${id}`}
-			/>
-			<div className={styles['left-column']}>
+			/> */}
+			<div className={styles['image-wrapper']}>
+				<Image
+					layout='fill'
+					objectFit='contain'
+					src={`/img/${product.img}`}
+					alt={`image product id ${id}`}
+				/>
+			</div>
+
+			<div className={styles['right-column']}>
 				<h1>{product.name}</h1>
 				<h2 className={styles.price}>${product.price}</h2>
 				<hr />
 				<div>
+					<label htmlFor='size'>Size</label>
 					<select
 						name='size'
 						disabled={!inStock}
-						defaultValue='none'
+						defaultValue={product.sizes[0].name}
 						onChange={e => setSelectedSize(e.target.value)}
 					>
-						<option value='none'>Select Size</option>
 						{product.sizes.map((size, idx) => {
 							const isAvailable = size.available;
 							return (
