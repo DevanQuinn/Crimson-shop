@@ -9,14 +9,26 @@ const Footer = ({ styles }): JSX.Element => {
 		<footer className={styles.footer}>
 			<h2>CONNECT WITH US</h2>
 			<div className={styles.socials}>
-				<a href='https://tiktok.com/@devanthedank' target='blank'>
+				<a
+					href='https://tiktok.com/@devanthedank'
+					target='blank'
+					aria-label='tiktok'
+				>
 					<SiTiktok style={socialStyle} />
 				</a>
-				<a href='https://instagram.com/devan_quinn' target='blank'>
-					<FiInstagram style={socialStyle} />{' '}
+				<a
+					href='https://instagram.com/devan_quinn'
+					target='blank'
+					aria-label='instagram'
+				>
+					<FiInstagram style={socialStyle} />
 				</a>
-				<a href='https://youtube.com/rigers9000' target='blank'>
-					<ImYoutube style={socialStyle} />{' '}
+				<a
+					href='https://youtube.com/rigers9000'
+					target='blank'
+					aria-label='youtube'
+				>
+					<ImYoutube style={socialStyle} />
 				</a>
 			</div>
 

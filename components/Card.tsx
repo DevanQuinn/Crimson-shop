@@ -36,7 +36,7 @@ const Card = ({ product, index }): JSX.Element => {
 				{!inStock ? noStock : null}
 
 				<div className={styles.info}>
-					<h3>{product.name}</h3>
+					<h4>{product.name}</h4>
 					<h4>${product.price}</h4>
 				</div>
 			</a>

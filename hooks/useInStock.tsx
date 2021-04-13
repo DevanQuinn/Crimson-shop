@@ -10,7 +10,7 @@ const useInStock = product => {
 		if (checkStock !== inStock) setInStock(checkStock);
 	}, [product]);
 
-	return [inStock, sizesInStock];
+	return [product.available, sizesInStock];
 };
 
 export default useInStock;

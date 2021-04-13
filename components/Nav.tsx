@@ -12,8 +12,8 @@ const Nav = ({ styles }): JSX.Element => {
 			</Link>
 			<Link href='/'>
 				<a className={styles.title}>
-					<h1>CRIMSON</h1>
-					<h6>ATHLETICS</h6>
+					<h2>CRIMSON</h2>
+					<h3>ATHLETICS</h3>
 				</a>
 			</Link>
 			<Link href='/about'>

@@ -11,12 +11,14 @@ const AddToCart = ({ info, inStock, optional = null }): JSX.Element => {
 		'data-item-name': info.product.name,
 		disabled: !inStock,
 	};
-	const optionalAttr = {
-		'data-item-custom1-required': 'true',
-		'data-item-custom1-name': optional?.name,
-		'data-item-custom1-options': optional?.options,
-		'data-item-custom1-value': optional?.selectedSize,
-	};
+	const optionalAttr = optional
+		? {
+				'data-item-custom1-required': 'true',
+				'data-item-custom1-name': optional?.name,
+				'data-item-custom1-options': optional?.options,
+				'data-item-custom1-value': optional?.selectedSize,
+		  }
+		: null;
 
 	return (
 		<button

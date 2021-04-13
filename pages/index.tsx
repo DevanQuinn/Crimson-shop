@@ -10,18 +10,23 @@ const Home = (): JSX.Element => {
 				<span className={styles['over-img-info']}>
 					<h1>New Drop April 21st</h1>
 					<Link href='/catalog'>
-						<div className={styles['catalog-link']}>
-							<a>View Current Catalog</a>
+						<a className={styles['catalog-link']}>
+							<p>View Current Catalog</p>
 							<BsArrowRightShort
 								style={{
 									width: '1.6em',
 									height: 'auto',
 								}}
 							/>
-						</div>
+						</a>
 					</Link>
 				</span>
-				<Image src='/img/header.png' layout='fill' objectFit='cover' />
+				<Image
+					src='/img/header.png'
+					layout='fill'
+					objectFit='cover'
+					alt='homepage header'
+				/>
 			</div>
 		</>
 	);

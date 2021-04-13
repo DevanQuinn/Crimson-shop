@@ -18,12 +18,16 @@ const item = ({ product }): JSX.Element => {
 		setPopupOpen(true);
 	};
 
-	const getCartSizes = () => {
-		const sizes = product.sizes.map(size => {
+	const getFirstAvailableSize = (): any => {
+		const firstSize = product.sizes.forEach(size => size.isAvailable);
+		return firstSize;
+	};
+
+	const getCartSizes = (): string => {
+		const sizes: string[] = product.sizes.map(size => {
 			if (size.available) return size.name.toString();
 		});
-		const filteredSizes = sizes.filter(size => size);
-		return filteredSizes.join('|');
+		return sizes.join('|');
 	};
 	const cartInfo = {
 		info: { id, product },
@@ -32,8 +36,12 @@ const item = ({ product }): JSX.Element => {
 			options: getCartSizes(),
 		},
 	};
-	const cartElement = inStock ? (
-		<AddToCart info={cartInfo.info} optional={cartInfo.optional} inStock />
+	const cartElement: JSX.Element = inStock ? (
+		<AddToCart
+			info={cartInfo.info}
+			optional={product.sizes.length ? cartInfo.optional : null}
+			inStock
+		/>
 	) : (
 		<button disabled>Sold out</button>
 	);
@@ -59,24 +67,26 @@ const item = ({ product }): JSX.Element => {
 				<h1>{product.name}</h1>
 				<h2 className={styles.price}>${product.price}</h2>
 				<hr />
-				<div>
-					<label htmlFor='size'>Size</label>
-					<select
-						name='size'
-						disabled={!inStock}
-						defaultValue={product.sizes[0].name}
-						onChange={e => setSelectedSize(e.target.value)}
-					>
-						{product.sizes.map((size, idx) => {
-							const isAvailable = size.available;
-							return (
-								<option value={size.name} disabled={!isAvailable} key={idx}>
-									{size.name}
-								</option>
-							);
-						})}
-					</select>
-				</div>
+				{product.sizes.length ? (
+					<div>
+						<label htmlFor='size'>Size</label>
+						<select
+							name='size'
+							disabled={!inStock}
+							defaultValue={getFirstAvailableSize()?.name}
+							onChange={e => setSelectedSize(e.target.value)}
+						>
+							{product.sizes.map((size, idx) => {
+								const isAvailable = size.available;
+								return (
+									<option value={size.name} disabled={!isAvailable} key={idx}>
+										{size.name}
+									</option>
+								);
+							})}
+						</select>
+					</div>
+				) : null}
 				{cartElement}
 				<p>{product.desc}</p>
 			</div>

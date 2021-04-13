@@ -23,8 +23,8 @@
 	position: absolute;
 }
 
-.catalog-link a {
-	line-height: 50px;
+.catalog-link p {
+	line-height: 30px;
 }
 
 .catalog-link:hover {
