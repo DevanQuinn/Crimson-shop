@@ -86,4 +86,11 @@
 		height: 250px;
 		width: 90%;
 	}
+	.card-bkg:hover > .hover {
+		opacity: 0;
+	}
+	.card-bkg:hover > .info,
+	.card-bkg:hover > .no-stock {
+		opacity: 1;
+	}
 }

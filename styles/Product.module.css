@@ -57,6 +57,13 @@
 	color: rgb(70, 70, 70);
 }
 
+.back-arrow {
+	width: 3em;
+	height: auto;
+	position: absolute;
+	left: 5%;
+}
+
 @media only screen and (max-width: 1024px) {
 	.wrapper {
 		display: flex;
@@ -82,5 +89,13 @@
 	.right-column button:hover {
 		background-color: initial;
 		color: initial;
+	}
+
+	.back-arrow {
+		position: fixed;
+		top: 3%;
+		left: 10vw;
+		z-index: 5;
+		width: 2.5em;
 	}
 }

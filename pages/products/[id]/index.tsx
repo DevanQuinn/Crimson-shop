@@ -1,22 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../../../styles/Product.module.css';
 import useInStock from '../../../hooks/useInStock';
-import Popup from '../../../components/UI/Popup';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { catalog } from '../../api/products.json';
 import AddToCart from '../../../components/AddToCart';
+import { BiArrowBack } from 'react-icons/bi';
 
 const item = ({ product }): JSX.Element => {
 	const router = useRouter();
 	const { id } = router.query;
 	const [inStock] = useInStock(product);
 	const [selectedSize, setSelectedSize] = useState('none');
-	const [popupOpen, setPopupOpen] = useState(false);
-	const showPopup = () => {
-		setPopupOpen(true);
-	};
 
 	const getFirstAvailableSize = (): any => {
 		const firstSize = product.sizes.forEach(size => size.isAvailable);
@@ -47,50 +44,51 @@ const item = ({ product }): JSX.Element => {
 	);
 
 	return (
-		<div className={styles.wrapper}>
-			{/* <Popup
-				info={{ message: 'Added to cart' }}
-				open={popupOpen}
-				autoClose={5000}
-				onClose={() => setPopupOpen(false)}
-			/> */}
-			<div className={styles['image-wrapper']}>
-				<Image
-					layout='fill'
-					objectFit='contain'
-					src={`/img/${product.img}`}
-					alt={`image product id ${id}`}
-				/>
-			</div>
+		<>
+			<Link href='/catalog'>
+				<a className={styles['back-arrow']} aria-label='Back to catalog'>
+					<BiArrowBack style={{ height: 'inherit', width: 'inherit' }} />
+				</a>
+			</Link>
+			<div className={styles.wrapper}>
+				<div className={styles['image-wrapper']}>
+					<Image
+						layout='fill'
+						objectFit='contain'
+						src={`/img/${product.img}`}
+						alt={`image product id ${id}`}
+					/>
+				</div>
 
-			<div className={styles['right-column']}>
-				<h1>{product.name}</h1>
-				<h2 className={styles.price}>${product.price}</h2>
-				<hr />
-				{product.sizes.length ? (
-					<div>
-						<label htmlFor='size'>Size</label>
-						<select
-							name='size'
-							disabled={!inStock}
-							defaultValue={getFirstAvailableSize()?.name}
-							onChange={e => setSelectedSize(e.target.value)}
-						>
-							{product.sizes.map((size, idx) => {
-								const isAvailable = size.available;
-								return (
-									<option value={size.name} disabled={!isAvailable} key={idx}>
-										{size.name}
-									</option>
-								);
-							})}
-						</select>
-					</div>
-				) : null}
-				{cartElement}
-				<p>{product.desc}</p>
+				<div className={styles['right-column']}>
+					<h1>{product.name}</h1>
+					<h2 className={styles.price}>${product.price}</h2>
+					<hr />
+					{product.sizes.length ? (
+						<div>
+							<label htmlFor='size'>Size</label>
+							<select
+								name='size'
+								disabled={!inStock}
+								defaultValue={getFirstAvailableSize()?.name}
+								onChange={e => setSelectedSize(e.target.value)}
+							>
+								{product.sizes.map((size, idx) => {
+									const isAvailable = size.available;
+									return (
+										<option value={size.name} disabled={!isAvailable} key={idx}>
+											{size.name}
+										</option>
+									);
+								})}
+							</select>
+						</div>
+					) : null}
+					{cartElement}
+					<p>{product.desc}</p>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
