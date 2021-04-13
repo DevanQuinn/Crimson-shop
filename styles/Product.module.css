@@ -36,15 +36,15 @@
 }
 
 .left-column button:hover {
-	background-color: var(--background-color);
+	background-color: var(--background-color-old);
 	color: crimson;
 }
 
 .left-column button:disabled {
-	pointer-events: none;
-	border: 3px solid var(--background-color);
+	border: 3px solid var(--background-color-old);
 	background-color: white;
 	color: crimson;
+	cursor: not-allowed;
 }
 
 .left-column h1,

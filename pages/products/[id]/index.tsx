@@ -6,6 +6,7 @@ import useInStock from '../../../hooks/useInStock';
 import Popup from '../../../components/UI/Popup';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { catalog } from '../../api/products.json';
+import AddToCart from '../../../components/AddToCart';
 
 const item = ({ product }): JSX.Element => {
 	const router = useRouter();
@@ -16,10 +17,26 @@ const item = ({ product }): JSX.Element => {
 	const showPopup = () => {
 		setPopupOpen(true);
 	};
-	const cartElement = (
-		<button disabled={selectedSize === 'none' || !inStock} onClick={showPopup}>
-			{inStock ? 'Add to cart' : 'Sold out'}
-		</button>
+	const getCartSizes = () => {
+		const sizes = product.sizes.map(size => {
+			if (size.available) return size.name.toString();
+		});
+		const filteredSizes = sizes.filter(size => size);
+		return filteredSizes.join('|');
+	};
+	const [cartSizes, setCartSizes] = useState(getCartSizes);
+	const cartInfo = {
+		info: { id, product },
+		optional: { name: 'Size', options: cartSizes, selectedSize },
+	};
+	const cartElement = inStock ? (
+		<AddToCart
+			info={cartInfo.info}
+			optional={cartInfo.optional}
+			inStock={selectedSize !== 'none' && inStock}
+		/>
+	) : (
+		<button disabled>Sold out</button>
 	);
 
 	return (
@@ -51,7 +68,7 @@ const item = ({ product }): JSX.Element => {
 						{product.sizes.map((size, idx) => {
 							const isAvailable = size.available;
 							return (
-								<option value={size.value} disabled={!isAvailable} key={idx}>
+								<option value={size.name} disabled={!isAvailable} key={idx}>
 									{size.name}
 								</option>
 							);

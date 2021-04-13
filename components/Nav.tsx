@@ -21,9 +21,11 @@ const Nav = ({ styles }): JSX.Element => {
 					<h3>About</h3>
 				</a>
 			</Link>
-			<button className={styles.button}>
-				<LocalMallIcon />
-			</button>
+			<div className={styles.button}>
+				<div className='snipcart-checkout'>
+					<LocalMallIcon />
+				</div>
+			</div>
 		</nav>
 	);
 };
