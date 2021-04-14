@@ -21,8 +21,8 @@ const Nav = ({ styles }): JSX.Element => {
 					<h3>About</h3>
 				</a>
 			</Link>
-			<div className={styles.button}>
-				<div className='snipcart-checkout'>
+			<div className='snipcart-checkout'>
+				<div className={styles.button}>
 					<LocalMallIcon />
 					<div className={styles['cart-count']}>
 						<span className='snipcart-items-count' />

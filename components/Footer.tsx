@@ -33,12 +33,17 @@ const Footer = ({ styles }): JSX.Element => {
 			</div>
 
 			<br />
-			<p className={styles.copyright}>© 2021 Crimson Athletics Inc.</p>
-			<Link href='/privacy'>
-				<a style={{ textDecoration: 'underline' }} className={styles.copyright}>
-					Privacy Policy
-				</a>
-			</Link>
+			<div className={styles.misc}>
+				<p className={styles.copyright}>© 2021 Crimson Athletics Inc.</p>
+				<Link href='/privacy'>
+					<a
+						style={{ textDecoration: 'underline' }}
+						className={styles.copyright}
+					>
+						Privacy Policy
+					</a>
+				</Link>
+			</div>
 		</footer>
 	);
 };

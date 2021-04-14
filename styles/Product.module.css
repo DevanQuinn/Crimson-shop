@@ -92,7 +92,7 @@
 	}
 
 	.back-arrow {
-		position: fixed;
+		position: absolute;
 		top: 3%;
 		left: 10vw;
 		z-index: 5;
