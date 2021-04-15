@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import server from '../../../server';
 
 const handler = (req, res) => {
-	const { name, email, message } = req.body;
+	const { name, email, subject, message } = req.body;
 	let mailerConfig = {
 		host: 'smtpout.secureserver.net',
 		secure: true,
@@ -21,15 +21,17 @@ const handler = (req, res) => {
 	const info = {
 		from: 'contact@crimsonathletics.shop',
 		to: 'devan@crimsonathletics.shop',
-		subject: 'NEW CONTACT FORM RECEIVED',
+		subject: subject ? `Contact: ${subject}` : 'New Contact Message',
 		html: `
-        <h1>New Message:</h1>
-        <br />
+        <h2>New Message from ${email}:</h2>
         <h3>Name: ${name}</h3>
-        <br />
         <h3>Email: ${email}</h3>
-        <br />
-        <h3>Message: ${message}</h3>
+        <h3>Subject: ${subject}</h3>
+        <h3>Message:</h3> <p>${message}</p>
+
+        <h4><a href="mailto:${email}?subject=Re:${
+			subject || 'Crimson Athletics Contact'
+		}">Reply to email</a></h4>
         `,
 	};
 	transporter.sendMail(info, err => {
@@ -39,7 +41,7 @@ const handler = (req, res) => {
 			return res.end();
 		}
 		res.status(201).redirect(`${server}/contact?submitted=true`);
-		res.end();
+		return res.end();
 	});
 };
 

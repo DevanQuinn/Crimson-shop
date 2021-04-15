@@ -16,6 +16,7 @@ const contact = (): JSX.Element => {
 			>
 				<input name='name' type='text' placeholder='Name' required />
 				<input name='email' type='email' placeholder='Email' required />
+				<input name='subject' type='text' placeholder='Subject (optional)' />
 				<textarea name='message' placeholder='Message' required />
 				<button type='submit'>Submit</button>
 				<p>Your information will solely be used to reply accordingly.</p>
