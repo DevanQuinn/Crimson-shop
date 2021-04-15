@@ -26,7 +26,7 @@ const item = ({ product }): JSX.Element => {
 			if (size.available) return size.name.toString();
 		});
 		// Remove blank entries
-		const filteredSizes = sizes.filter(size => size);
+		const filteredSizes = product.sizes.map(size => size.name.toString());
 		return filteredSizes.join('|');
 	};
 	const cartInfo = {

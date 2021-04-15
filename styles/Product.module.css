@@ -20,6 +20,8 @@
 }
 
 .right-column select {
+	background-color: white;
+	color: black;
 	width: 100%;
 	height: 50px;
 	font-size: 18px;

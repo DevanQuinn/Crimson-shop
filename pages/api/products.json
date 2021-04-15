@@ -6,8 +6,8 @@
 			"price": "29.99",
 			"available": true,
 			"sizes": [
-				{ "name": "Small", "available": false },
-				{ "name": "Medium", "available": false },
+				{ "name": "Small", "available": true },
+				{ "name": "Medium", "available": true },
 				{ "name": "Large", "available": true },
 				{ "name": "Extra-Large", "available": true }
 			],
@@ -17,12 +17,12 @@
 			"name": "SOLD OUT ITEM",
 			"desc": "Soooo good. too bad it's sold out tho",
 			"price": "0.99",
-			"available": false,
+			"available": true,
 			"sizes": [
-				{ "name": "Small", "available": false },
-				{ "name": "Medium", "available": false },
-				{ "name": "Large", "available": false },
-				{ "name": "Extra-Large", "available": false }
+				{ "name": "Small", "available": true },
+				{ "name": "Medium", "available": true },
+				{ "name": "Large", "available": true },
+				{ "name": "Extra-Large", "available": true }
 			],
 			"img": "gymshark2.png"
 		},
