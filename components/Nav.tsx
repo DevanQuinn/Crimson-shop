@@ -1,22 +1,11 @@
 import Link from 'next/link';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
+import useVisible from '../hooks/useVisible';
 
 const Nav = ({ styles }): JSX.Element => {
-	const [isVisible, setIsVisible] = useState(true);
 	const titleRef = useRef(null);
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			entries => {
-				// isIntersecting is true when element and viewport are overlapping
-				// isIntersecting is false when element and viewport don't overlap
-				setIsVisible(entries[0].isIntersecting);
-			},
-			{ threshold: [0] }
-		);
-		observer.observe(titleRef.current);
-		return observer.unobserve(titleRef.current);
-	});
+	const isVisible = useVisible(titleRef);
 
 	return (
 		<nav className={styles.nav}>
