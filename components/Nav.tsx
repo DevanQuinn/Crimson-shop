@@ -4,7 +4,6 @@ import { useRef, useEffect, useState } from 'react';
 
 const Nav = ({ styles }): JSX.Element => {
 	const [isVisible, setIsVisible] = useState(true);
-	const [rect, setRect] = useState(null);
 	const titleRef = useRef(null);
 	useEffect(() => {
 		const observer = new IntersectionObserver(
@@ -12,11 +11,11 @@ const Nav = ({ styles }): JSX.Element => {
 				// isIntersecting is true when element and viewport are overlapping
 				// isIntersecting is false when element and viewport don't overlap
 				setIsVisible(entries[0].isIntersecting);
-				if (entries[0].isIntersecting) console.log('yo');
 			},
 			{ threshold: [0] }
 		);
 		observer.observe(titleRef.current);
+		return observer.unobserve(titleRef.current);
 	});
 
 	return (
