@@ -65,6 +65,7 @@
 	position: absolute;
 	right: 0;
 	margin-right: 40px;
+	margin-top: -15px;
 	background: none;
 	/* color: white; */
 }
@@ -90,9 +91,14 @@
 }
 
 .copyright {
+	margin: 0;
 	margin-left: 10px;
 	font-size: 12px;
 	display: inline-block;
+}
+
+a.copyright {
+	text-decoration: underline;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -131,13 +137,17 @@
 		font-size: 0.75em;
 	}
 
+	.footer h2 {
+		display: none;
+	}
+
 	.footer,
 	.footer h2,
 	.copyright {
 		margin: 0;
 	}
 
-	.button {
+	.fixed-button {
 		position: fixed;
 		z-index: 10;
 		bottom: 10px;

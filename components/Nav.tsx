@@ -1,7 +1,24 @@
 import Link from 'next/link';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
+import { useRef, useEffect, useState } from 'react';
 
 const Nav = ({ styles }): JSX.Element => {
+	const [isVisible, setIsVisible] = useState(true);
+	const [rect, setRect] = useState(null);
+	const titleRef = useRef(null);
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			entries => {
+				// isIntersecting is true when element and viewport are overlapping
+				// isIntersecting is false when element and viewport don't overlap
+				setIsVisible(entries[0].isIntersecting);
+				if (entries[0].isIntersecting) console.log('yo');
+			},
+			{ threshold: [0] }
+		);
+		observer.observe(titleRef.current);
+	});
+
 	return (
 		<nav className={styles.nav}>
 			<hr className={styles.hr} />
@@ -11,7 +28,7 @@ const Nav = ({ styles }): JSX.Element => {
 				</a>
 			</Link>
 			<Link href='/'>
-				<a className={styles.title}>
+				<a className={styles.title} ref={titleRef}>
 					<h2>CRIMSON</h2>
 					<h3>ATHLETICS</h3>
 				</a>
@@ -22,7 +39,7 @@ const Nav = ({ styles }): JSX.Element => {
 				</a>
 			</Link>
 			<div className='snipcart-checkout'>
-				<div className={styles.button}>
+				<div className={!isVisible ? styles['fixed-button'] : styles.button}>
 					<LocalMallIcon />
 					<div className={styles['cart-count']}>
 						<span className='snipcart-items-count' />

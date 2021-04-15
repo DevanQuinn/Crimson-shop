@@ -13,7 +13,7 @@ const privacy = (): JSX.Element => {
 				, and other sites we own and operate.{' '}
 			</p>
 			<p>
-				This policy is effective as of 13 April 2021 and was last updated on 13
+				This policy is effective as of 14 April 2021 and was last updated on 14
 				April 2021.{' '}
 			</p>
 			<h3>Information We Collect</h3>
@@ -78,6 +78,11 @@ const privacy = (): JSX.Element => {
 			</p>
 			<ul>
 				<li>to contact and communicate with you</li>
+				<li>
+					for analytics, market research, and business development, including to
+					operate and improve our website, associated applications, and
+					associated social media platforms
+				</li>
 				<li>for internal record keeping and administrative purposes</li>
 			</ul>
 			<p>
@@ -203,14 +208,6 @@ const privacy = (): JSX.Element => {
 				your complaint. You also have the right to contact a regulatory body or
 				data protection authority in relation to your complaint.{' '}
 			</p>
-			<h3>Use of Cookies</h3>
-			<p>
-				We use &ldquo;cookies&rdquo; to collect information about you and your
-				activity across our site. A cookie is a small piece of data that our
-				website stores on your computer, and accesses each time you visit, so we
-				can understand how you use our site. This helps us serve you content
-				based on preferences you have specified.{' '}
-			</p>
 			<h3>Limits of Our Policy</h3>
 			<p>
 				Our website may link to external sites that are not operated by us.
@@ -237,9 +234,9 @@ const privacy = (): JSX.Element => {
 				using the following details:{' '}
 			</p>
 			<p>
-				Contact Email
+				Devan Quinn
 				<br />
-				contact@crimsonathletics.shop{' '}
+				https://crimsonathletics.shop/contact{' '}
 			</p>
 		</div>
 	);
