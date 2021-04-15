@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import { BsArrowRightShort } from 'react-icons/bs';
+import Button from '../components/Button';
 
 const Home = (): JSX.Element => {
 	return (

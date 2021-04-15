@@ -14,12 +14,6 @@ class MyDocument extends Document {
 						rel='stylesheet'
 						href='https://cdn.snipcart.com/themes/v3.1.0/default/snipcart.css'
 					/>
-					<link
-						id='snipcart-theme'
-						type='text/css'
-						href='https://app.snipcart.com/themes/base/snipcart.css'
-						rel='stylesheet'
-					/>
 				</Head>
 				<body>
 					<script

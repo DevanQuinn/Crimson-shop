@@ -3,6 +3,7 @@
 :root {
 	--background-color: white;
 	--background-color-old: rgb(39, 39, 39);
+	--cart-color: rgb(253, 231, 105);
 	/* --font-default: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
 	--squada-font: 'Squada One', Georgia, serif;
@@ -23,6 +24,13 @@ body {
 
 body {
 	overflow: scroll;
+	background-color: var(--background-color-old);
+	color: white;
+}
+
+nav,
+footer {
+	color: black;
 }
 
 a {
@@ -35,8 +43,7 @@ a {
 }
 
 .heading-title {
-	border-bottom: 1px solid black;
-	padding-bottom: 10px;
+	text-transform: uppercase;
 	text-align: center;
 }
 

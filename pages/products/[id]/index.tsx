@@ -13,24 +13,28 @@ const item = ({ product }): JSX.Element => {
 	const router = useRouter();
 	const { id } = router.query;
 	const [inStock] = useInStock(product);
-	const [selectedSize, setSelectedSize] = useState('none');
-
 	const getFirstAvailableSize = (): any => {
 		const firstSize = product.sizes.forEach(size => size.isAvailable);
 		return firstSize;
 	};
+	const [selectedSize, setSelectedSize] = useState(() =>
+		getFirstAvailableSize()
+	);
 
 	const getCartSizes = (): string => {
 		const sizes: string[] = product.sizes.map(size => {
 			if (size.available) return size.name.toString();
 		});
-		return sizes.join('|');
+		// Remove blank entries
+		const filteredSizes = sizes.filter(size => size);
+		return filteredSizes.join('|');
 	};
 	const cartInfo = {
 		info: { id, product },
 		optional: {
 			name: 'Size',
 			options: getCartSizes(),
+			selectedSize,
 		},
 	};
 	const cartElement: JSX.Element = inStock ? (
@@ -63,7 +67,7 @@ const item = ({ product }): JSX.Element => {
 				<div className={styles['right-column']}>
 					<h1>{product.name}</h1>
 					<h2 className={styles.price}>${product.price}</h2>
-					<hr />
+					<hr style={{ visibility: 'hidden' }} />
 					{product.sizes.length ? (
 						<div>
 							<label htmlFor='size'>Size</label>
@@ -85,7 +89,13 @@ const item = ({ product }): JSX.Element => {
 						</div>
 					) : null}
 					{cartElement}
-					<p>{product.desc}</p>
+					<hr style={{ color: 'white', width: '100%', marginTop: '50px' }} />
+
+					{product.desc.split('{NEWLINE}').map((line, idx) => (
+						<p key={idx} className={styles.desc}>
+							{line}
+						</p>
+					))}
 				</div>
 			</div>
 		</>

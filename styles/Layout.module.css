@@ -14,7 +14,7 @@
 }
 
 .title h3 {
-	color: rgb(133, 133, 133);
+	color: var(--background-color-old);
 	text-align: center;
 	margin: 0;
 	font-size: 18px;
@@ -22,11 +22,12 @@
 	text-indent: 0.6rem;
 }
 
-.title:hover {
-	transform: scale(1.1);
+.title:active {
+	transform: scale(0.9);
 }
 
 .nav {
+	padding: 0;
 	position: relative;
 	display: grid;
 	grid-template-columns: 4fr 1fr 2fr 1fr 4fr;
@@ -39,7 +40,7 @@
 
 .nav a,
 .title {
-	padding: 10px;
+	padding: 5px;
 }
 
 .cart-count {
@@ -54,10 +55,6 @@
 	outline: none;
 }
 
-.link:hover {
-	text-decoration: underline;
-}
-
 .button {
 	cursor: pointer;
 	outline: 0;
@@ -67,7 +64,6 @@
 	margin-right: 40px;
 	margin-top: -15px;
 	background: none;
-	/* color: white; */
 }
 
 .footer {
@@ -77,6 +73,7 @@
 	padding: 15px 0 5px 0;
 	margin-top: 25px;
 	border-top: 1px solid black;
+	position: relative;
 }
 
 .socials {
@@ -84,6 +81,16 @@
 	flex-flow: row wrap;
 	justify-content: center;
 	align-items: center;
+	width: 30%;
+	margin: 0 auto;
+}
+
+.socials span {
+	width: 3px;
+	margin: 0 10px;
+	height: 45px;
+	background-color: black;
+	color: black;
 }
 
 .socials a {
@@ -92,9 +99,14 @@
 
 .copyright {
 	margin: 0;
-	margin-left: 10px;
 	font-size: 12px;
 	display: inline-block;
+}
+
+h5.copyright {
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
 }
 
 a.copyright {
@@ -119,10 +131,6 @@ a.copyright {
 		margin-top: 50px;
 	}
 
-	.link {
-		display: none;
-	}
-
 	.title:hover {
 		transform: inherit;
 	}
@@ -137,8 +145,9 @@ a.copyright {
 		font-size: 0.75em;
 	}
 
-	.footer h2 {
-		display: none;
+	.socials {
+		flex-flow: row wrap;
+		width: 100%;
 	}
 
 	.footer,
@@ -148,20 +157,25 @@ a.copyright {
 	}
 
 	.fixed-button {
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		width: 55px;
+		height: 55px;
 		position: fixed;
 		z-index: 10;
-		bottom: 10px;
-		right: 10px;
-		margin: 0;
-		background-color: var(--background-color-old);
-		color: white;
+		bottom: 15px;
+		right: 15px;
+		background-color: var(--cart-color);
+		color: var(--background-color-old);
 		border-radius: 50px;
-		padding: 20px;
+		aspect-ratio: 1/1;
+		border: 3px solid var(--background-color-old);
 	}
 
 	.misc {
 		display: flex;
-		flex-flow: column wrap;
+		flex-flow: row wrap;
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 5%;

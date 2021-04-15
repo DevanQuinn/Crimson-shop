@@ -2,7 +2,7 @@
 	"catalog": [
 		{
 			"name": "Gymshark shirt idk",
-			"desc": "The best gymshark shirt ever!!!",
+			"desc": "The best gymshark shirt ever!!! {NEWLINE} Compression fit, dry clean only :D",
 			"price": "29.99",
 			"available": true,
 			"sizes": [

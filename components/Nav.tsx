@@ -2,39 +2,37 @@ import Link from 'next/link';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { useRef } from 'react';
 import useVisible from '../hooks/useVisible';
+import { useRouter } from 'next/router';
+import NavLink from '../components/NavLink';
 
 const Nav = ({ styles }): JSX.Element => {
+	const path = useRouter().pathname;
 	const titleRef = useRef(null);
 	const isVisible = useVisible(titleRef);
 
 	return (
-		<nav className={styles.nav}>
-			<hr className={styles.hr} />
-			<Link href='/catalog'>
-				<a className={styles.link}>
+		<header>
+			<nav className={styles.nav}>
+				<hr className={styles.hr} />
+				<NavLink href='/catalog'>
 					<h3>Catalog</h3>
-				</a>
-			</Link>
-			<Link href='/'>
-				<a className={styles.title} ref={titleRef}>
-					<h2>CRIMSON</h2>
-					<h3>ATHLETICS</h3>
-				</a>
-			</Link>
-			<Link href='/about'>
-				<a className={styles.link}>
+				</NavLink>
+				<Link href='/'>
+					<a className={styles.title} ref={titleRef}>
+						<h2>CRIMSON</h2>
+						<h3>ATHLETICS</h3>
+					</a>
+				</Link>
+				<NavLink href='/about'>
 					<h3>About</h3>
-				</a>
-			</Link>
-			<div className='snipcart-checkout'>
-				<div className={!isVisible ? styles['fixed-button'] : styles.button}>
-					<LocalMallIcon />
-					<div className={styles['cart-count']}>
-						<span className='snipcart-items-count' />
+				</NavLink>
+				<div className='snipcart-checkout'>
+					<div className={!isVisible ? styles['fixed-button'] : styles.button}>
+						<LocalMallIcon style={{ marginBottom: '3px' }} />
 					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+		</header>
 	);
 };
 

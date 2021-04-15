@@ -8,7 +8,6 @@ const Footer = ({ styles }): JSX.Element => {
 
 	return (
 		<footer className={styles.footer}>
-			<h2>CONNECT WITH US</h2>
 			<div className={styles.socials}>
 				<a
 					href='https://tiktok.com/@devanthedank'
@@ -33,17 +32,20 @@ const Footer = ({ styles }): JSX.Element => {
 				</a>
 			</div>
 
-			<Link href='/contact'>
-				<a className={styles.copyright}>
-					<h3>Contact Us</h3>
-				</a>
-			</Link>
 			<div className={styles.misc}>
-				<p className={styles.copyright}>© 2021 Crimson Athletics Inc.</p>
+				<Link href='/contact'>
+					<a className={styles.copyright}>
+						<h4>Contact Us</h4>
+					</a>
+				</Link>
+				|
 				<Link href='/privacy'>
-					<a className={styles.copyright}>Privacy Policy</a>
+					<a className={styles.copyright}>
+						<h4>Privacy Policy</h4>
+					</a>
 				</Link>
 			</div>
+			<h5 className={styles.copyright}>© 2021 Crimson Athletics Inc.</h5>
 		</footer>
 	);
 };

@@ -54,7 +54,11 @@
 }
 
 .price {
-	color: rgb(70, 70, 70);
+	color: rgb(167, 167, 167);
+}
+
+.desc {
+	margin: 5px;
 }
 
 .back-arrow {
@@ -84,11 +88,6 @@
 		display: flex;
 		width: 100%;
 		margin: 0;
-	}
-
-	.right-column button:hover {
-		background-color: initial;
-		color: initial;
 	}
 
 	.back-arrow {
