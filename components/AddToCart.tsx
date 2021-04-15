@@ -6,8 +6,8 @@ const AddToCart = ({ info, inStock, optional = null }): JSX.Element => {
 		'data-item-id': info.id,
 		'data-item-price': info.product.price,
 		'data-item-url': `/products/${info.id}`,
-		'data-item-description': info.product.desc,
-		'data-item-image': `/img/${info.product.img}`,
+		'data-item-description': info.product.description,
+		'data-item-image': info.product.image,
 		'data-item-name': info.product.name,
 		disabled: !inStock,
 	};

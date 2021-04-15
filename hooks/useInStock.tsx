@@ -4,13 +4,10 @@ const useInStock = product => {
 	const [inStock, setInStock] = useState(true);
 	const [sizesInStock, setSizesInStock] = useState();
 	useEffect(() => {
-		const sizes = product.sizes.filter(size => !size.available);
-		const checkStock = sizes.length !== product.sizes.length;
-		if (checkStock) setSizesInStock(sizes);
-		if (checkStock !== inStock) setInStock(checkStock);
+		setInStock(product.totalStock > 0);
 	}, [product]);
 
-	return [product.available, sizesInStock];
+	return [inStock, sizesInStock];
 };
 
 export default useInStock;

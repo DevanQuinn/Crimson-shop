@@ -4,43 +4,35 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../../../styles/Product.module.css';
 import useInStock from '../../../hooks/useInStock';
-import { GetStaticProps, GetStaticPaths } from 'next';
-import { catalog } from '../../api/products.json';
+import { GetServerSideProps } from 'next';
 import AddToCart from '../../../components/AddToCart';
 import { BiArrowBack } from 'react-icons/bi';
+import server from '../../../server';
 
 const item = ({ product }): JSX.Element => {
 	const router = useRouter();
 	const { id } = router.query;
 	const [inStock] = useInStock(product);
 	const getFirstAvailableSize = (): any => {
-		const firstSize = product.sizes.forEach(size => size.isAvailable);
-		return firstSize;
+		const firstSize = product.variants.filter(size => size.stock > 0);
+		if (!product.variants.length) return null;
+		return firstSize[0].variation[0].option;
 	};
 	const [selectedSize, setSelectedSize] = useState(() =>
 		getFirstAvailableSize()
 	);
-
-	const getCartSizes = (): string => {
-		const sizes: string[] = product.sizes.map(size => {
-			if (size.available) return size.name.toString();
-		});
-		// Remove blank entries
-		const filteredSizes = product.sizes.map(size => size.name.toString());
-		return filteredSizes.join('|');
-	};
 	const cartInfo = {
 		info: { id, product },
 		optional: {
 			name: 'Size',
-			options: getCartSizes(),
+			options: product.customFields[0]?.options,
 			selectedSize,
 		},
 	};
 	const cartElement: JSX.Element = inStock ? (
 		<AddToCart
 			info={cartInfo.info}
-			optional={product.sizes.length ? cartInfo.optional : null}
+			optional={product.variants.length ? cartInfo.optional : null}
 			inStock
 		/>
 	) : (
@@ -59,7 +51,7 @@ const item = ({ product }): JSX.Element => {
 					<Image
 						layout='fill'
 						objectFit='contain'
-						src={`/img/${product.img}`}
+						src={product.image}
 						alt={`image product id ${id}`}
 					/>
 				</div>
@@ -68,20 +60,24 @@ const item = ({ product }): JSX.Element => {
 					<h1>{product.name}</h1>
 					<h2 className={styles.price}>${product.price}</h2>
 					<hr style={{ visibility: 'hidden' }} />
-					{product.sizes.length ? (
+					{product.variants.length ? (
 						<div>
 							<label htmlFor='size'>Size</label>
 							<select
 								name='size'
 								disabled={!inStock}
-								defaultValue={getFirstAvailableSize()?.name}
+								defaultValue={getFirstAvailableSize()}
 								onChange={e => setSelectedSize(e.target.value)}
 							>
-								{product.sizes.map((size, idx) => {
-									const isAvailable = size.available;
+								{product.variants.map((size, idx) => {
+									const isAvailable = size.stock > 0;
 									return (
-										<option value={size.name} disabled={!isAvailable} key={idx}>
-											{size.name}
+										<option
+											value={size.variation[0].option}
+											disabled={!isAvailable}
+											key={idx}
+										>
+											{size.variation[0].option}
 										</option>
 									);
 								})}
@@ -91,7 +87,7 @@ const item = ({ product }): JSX.Element => {
 					{cartElement}
 					<hr style={{ color: 'white', width: '100%', marginTop: '50px' }} />
 
-					{product.desc.split('{NEWLINE}').map((line, idx) => (
+					{product.description.split('{NEWLINE}').map((line, idx) => (
 						<p key={idx} className={styles.desc}>
 							{line}
 						</p>
@@ -102,23 +98,34 @@ const item = ({ product }): JSX.Element => {
 	);
 };
 
-export const getStaticProps: GetStaticProps = async context => {
+// export const getStaticProps: GetStaticProps = async context => {
+// 	const { id } = context.params;
+// 	const product = catalog[Number(id) - 1];
+// 	if (!product) return { notFound: true };
+
+// 	return { props: { product } };
+// };
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+// 	const ids = catalog.map((_item, idx) => idx + 1);
+// 	const paths = ids.map(id => {
+// 		return {
+// 			params: { id: id.toString() },
+// 		};
+// 	});
+
+// 	return { paths, fallback: false };
+// };
+
+export const getServerSideProps: GetServerSideProps = async context => {
 	const { id } = context.params;
-	const product = catalog[Number(id) - 1];
-	if (!product) return { notFound: true };
-
-	return { props: { product } };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-	const ids = catalog.map((_item, idx) => idx + 1);
-	const paths = ids.map(id => {
-		return {
-			params: { id: id.toString() },
-		};
+	const res = await fetch(`${server}/api/${id}`);
+	if (res.status === 404) return { notFound: true };
+	const product = await res.json().catch(() => {
+		notFound: true;
 	});
-
-	return { paths, fallback: false };
+	if (!product) return { notFound: true };
+	return { props: { product } };
 };
 
 export default item;

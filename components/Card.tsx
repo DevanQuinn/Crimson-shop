@@ -12,7 +12,7 @@ const Card = ({ product, index }): JSX.Element => {
 		</div>
 	);
 	return (
-		<Link href={`/products/${index + 1}`}>
+		<Link href={`/products/${product.userDefinedId}`}>
 			<a className={styles['card-bkg']}>
 				<div className={styles.hover}>
 					<span>
@@ -30,7 +30,7 @@ const Card = ({ product, index }): JSX.Element => {
 						layout='fill'
 						objectFit='cover'
 						alt='yea'
-						src={`/img/${product.img}`}
+						src={product.image}
 					/>
 				</div>
 				{!inStock ? noStock : null}
