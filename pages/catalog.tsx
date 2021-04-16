@@ -14,7 +14,14 @@ const Catalog = ({ products }): JSX.Element => {
 export default Catalog;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const request = await fetch(`${server}/api`);
+	const request = await fetch(`https://app.snipcart.com/api/products`, {
+		headers: {
+			Authorization: `Basic ${Buffer.from(
+				process.env.SNIPCART_API_KEY
+			).toString('base64')}`,
+			Accept: 'application/json',
+		},
+	});
 	const json = await request.json();
 	return { props: { products: json.items } };
 };

@@ -100,7 +100,7 @@ const item = ({ product }): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const { id } = context.params;
-	const request = await fetch(`${server}/api/${id}`, {
+	const request = await fetch(`https://app.snipcart.com/api/products/${id}`, {
 		headers: {
 			Authorization: `Basic ${Buffer.from(
 				process.env.SNIPCART_API_KEY
