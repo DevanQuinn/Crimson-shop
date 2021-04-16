@@ -1,7 +1,7 @@
-const Button = ({ children, onClick = null }) => {
+const Button = ({ children, onClick = null, buttonStyle = null }) => {
 	return (
-		<>
-			<button onClick={onClick}>
+		<div>
+			<button onClick={onClick} style={buttonStyle}>
 				<span>{children}</span>
 				<div></div>
 			</button>
@@ -43,7 +43,7 @@ const Button = ({ children, onClick = null }) => {
 					transform: translate(-50%, -50%);
 				}
 			`}</style>
-		</>
+		</div>
 	);
 };
 
