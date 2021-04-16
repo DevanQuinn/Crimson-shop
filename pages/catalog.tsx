@@ -14,7 +14,7 @@ const Catalog = ({ products }): JSX.Element => {
 export default Catalog;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const request = await fetch(`${server}/api`);
+	const request = await fetch(`${'http://localhost:3000'}/api`);
 	const json = await request.json();
 	return { props: { products: json.items } };
 };
