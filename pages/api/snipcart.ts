@@ -1,8 +1,6 @@
 const btoa = require('btoa');
 const fs = require('fs');
 import { isProduction } from '../../server';
-import catalog from '../../public/catalog.json';
-import catalogTest from './catalog_test.json';
 
 const updateStock = async () => {
 	const request = await fetch('https://app.snipcart.com/api/products', {
@@ -12,18 +10,22 @@ const updateStock = async () => {
 		},
 	});
 	const json = await request.json();
-	fs.writeFileSync(
-		isProduction ? 'public/catalog.json' : 'public/catalog.json',
-		JSON.stringify(json),
-		err => console.log(err)
+	fs.writeFileSync('catalog.json', JSON.stringify(json), err =>
+		console.log(err)
 	);
 	return json;
 };
 
 const checkIfEmpty = async () => {
-	const serverCatalog = isProduction ? catalog : catalogTest;
-	const isEmpty = Object.keys(serverCatalog).length === 0;
-	const returnValue = isEmpty ? await updateStock() : serverCatalog;
+	let isEmpty;
+	let catalogStream;
+	try {
+		catalogStream = fs.readFileSync('catalog.json');
+		isEmpty = Object.keys(catalogStream).length === 0;
+	} catch (err) {
+		isEmpty = true;
+	}
+	const returnValue = isEmpty ? await updateStock() : catalogStream;
 	return returnValue;
 };
 
