@@ -13,7 +13,7 @@ const updateStock = async () => {
 	});
 	const json = await request.json();
 	fs.writeFileSync(
-		isProduction ? 'catalog.json' : 'public/catalog.json',
+		isProduction ? 'public/catalog.json' : 'public/catalog.json',
 		JSON.stringify(json),
 		err => console.log(err)
 	);
