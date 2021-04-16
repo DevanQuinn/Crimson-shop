@@ -100,14 +100,7 @@ const item = ({ product }): JSX.Element => {
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const { id } = context.params;
-	const request = await fetch(`https://app.snipcart.com/api//${id}`, {
-		headers: {
-			Authorization: `Basic ${Buffer.from(
-				process.env.SNIPCART_API_KEY
-			).toString('base64')}`,
-			Accept: 'application/json',
-		},
-	});
+	const request = await fetch(`${server}/api/${id}`);
 	if (request.status === 404) return { notFound: true };
 	const product = await request.json();
 	if (!product) return { notFound: true };

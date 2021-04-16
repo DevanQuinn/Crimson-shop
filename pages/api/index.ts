@@ -1,9 +1,18 @@
 const fs = require('fs');
-import { checkIfEmpty } from './snipcart';
 
 const handler = async (req, res) => {
-	const catalog = await checkIfEmpty();
-	res.json(catalog);
+	console.log(process.env);
+	const val = await fetch(
+		'https://api.jsonbin.io/b/6079328aee971419c4daae57/latest',
+		{
+			headers: {
+				method: 'GET',
+				'Secret-Key': process.env.JSONBIN_API_KEY,
+			},
+		}
+	);
+	const json = await val.json();
+	res.status(200).send(json);
 };
 
 export default handler;
