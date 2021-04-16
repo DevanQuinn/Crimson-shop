@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FiArrowRightCircle } from 'react-icons/fi';
 import useInStock from '../hooks/useInStock';
 
-const Card = ({ product, index }): JSX.Element => {
+const Card = ({ product }): JSX.Element => {
 	const [inStock] = useInStock(product);
 	const noStock = (
 		<div className={styles['no-stock']}>

@@ -17,7 +17,7 @@ class MyDocument extends Document {
 				</Head>
 				<body>
 					<script
-						async
+						defer
 						src='https://cdn.snipcart.com/themes/v3.1.0/default/snipcart.js'
 					></script>
 					<div

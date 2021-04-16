@@ -1,6 +1,8 @@
 const btoa = require('btoa');
+const fs = require('fs');
+import catalog from './catalog.json';
 
-const fetchStock = async () => {
+const updateStock = async () => {
 	const request = await fetch('https://app.snipcart.com/api/products', {
 		headers: {
 			Authorization: `Basic ${btoa(process.env.SNIPCART_API_KEY)}`,
@@ -8,16 +10,24 @@ const fetchStock = async () => {
 		},
 	});
 	const json = await request.json();
+	fs.writeFileSync('catalog.json', json);
 	return json;
 };
 
-export let stock = fetchStock();
+const checkIfEmpty = async () => {
+	const isEmpty = Object.keys(catalog).length === 0;
+	const returnValue = isEmpty ? await updateStock() : catalog;
+	return returnValue;
+};
 
-const handler = (req, res) => {
+const handler = async (req, res) => {
 	const { eventName } = req.body;
-	if (eventName !== 'order.completed') return res.status(200).end();
-	stock = fetchStock();
+	if (eventName !== 'order.completed' || eventName === 'order.refund.created') {
+		return res.status(200).end();
+	}
+	updateStock();
 	return res.status(201).end();
 };
 
 export default handler;
+export { checkIfEmpty };

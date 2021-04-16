@@ -98,32 +98,18 @@ const item = ({ product }): JSX.Element => {
 	);
 };
 
-// export const getStaticProps: GetStaticProps = async context => {
-// 	const { id } = context.params;
-// 	const product = catalog[Number(id) - 1];
-// 	if (!product) return { notFound: true };
-
-// 	return { props: { product } };
-// };
-
-// export const getStaticPaths: GetStaticPaths = async () => {
-// 	const ids = catalog.map((_item, idx) => idx + 1);
-// 	const paths = ids.map(id => {
-// 		return {
-// 			params: { id: id.toString() },
-// 		};
-// 	});
-
-// 	return { paths, fallback: false };
-// };
-
 export const getServerSideProps: GetServerSideProps = async context => {
 	const { id } = context.params;
-	const res = await fetch(`${server}/api/${id}`);
-	if (res.status === 404) return { notFound: true };
-	const product = await res.json().catch(() => {
-		notFound: true;
+	const request = await fetch(`${server}/api/${id}`, {
+		headers: {
+			Authorization: `Basic ${Buffer.from(
+				process.env.SNIPCART_API_KEY
+			).toString('base64')}`,
+			Accept: 'application/json',
+		},
 	});
+	if (request.status === 404) return { notFound: true };
+	const product = await request.json();
 	if (!product) return { notFound: true };
 	return { props: { product } };
 };
