@@ -1,7 +1,7 @@
 const btoa = require('btoa');
 const fs = require('fs');
 import { isProduction } from '../../server';
-import catalog from './catalog.json';
+import catalog from '../../public/catalog.json';
 import catalogTest from './catalog_test.json';
 
 const updateStock = async () => {
@@ -12,7 +12,11 @@ const updateStock = async () => {
 		},
 	});
 	const json = await request.json();
-	fs.writeFileSync('catalog.json', JSON.stringify(json));
+	fs.writeFileSync(
+		isProduction ? 'catalog.json' : 'public/catalog.json',
+		JSON.stringify(json),
+		err => console.log(err)
+	);
 	return json;
 };
 
