@@ -6,7 +6,8 @@ const Catalog = ({ products }): JSX.Element => {
 	return (
 		<>
 			<h1 className='heading-title'> Catalog</h1>
-			<CardGrid products={products} />
+			<h2>products.status</h2>
+			{/* <CardGrid products={products} /> */}
 		</>
 	);
 };
@@ -22,6 +23,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 			Accept: 'application/json',
 		},
 	});
-	const json = await request.json();
-	return { props: { products: json.items } };
+	// const json = await request.json();
+	return { props: { products: request.status } };
 };
