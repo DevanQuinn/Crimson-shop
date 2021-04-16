@@ -8,6 +8,7 @@ import { GetServerSideProps } from 'next';
 import AddToCart from '../../../components/AddToCart';
 import { BiArrowBack } from 'react-icons/bi';
 import server from '../../../server';
+const btoa = require('btoa');
 
 const item = ({ product }): JSX.Element => {
 	const router = useRouter();
@@ -98,13 +99,34 @@ const item = ({ product }): JSX.Element => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getStaticProps = async context => {
 	const { id } = context.params;
-	const request = await fetch(`${server}/api/${id}`);
-	if (request.status === 404) return { notFound: true };
-	const product = await request.json();
-	if (!product) return { notFound: true };
-	return { props: { product } };
+	const res = await fetch(`https://app.snipcart.com/api/products/${id}`, {
+		headers: {
+			Authorization: `Basic ${btoa(process.env.SNIPCART_API_KEY)}`,
+			Accept: 'application/json',
+		},
+	});
+	if (res.status !== 200) return { notFound: true };
+	const json = await res.json();
+	return { props: { product: json } };
 };
 
+export const getStaticPaths = async () => {
+	const res = await fetch(`https://app.snipcart.com/api/products`, {
+		headers: {
+			Authorization: `Basic ${btoa(process.env.SNIPCART_API_KEY)}`,
+			Accept: 'application/json',
+		},
+	});
+	const catalog = await res.json();
+	const ids = catalog.items.map((_item, idx) => idx + 1);
+	const paths = ids.map(id => {
+		return {
+			params: { id: id.toString() },
+		};
+	});
+
+	return { paths, fallback: false };
+};
 export default item;

@@ -12,7 +12,7 @@ const Card = ({ product }): JSX.Element => {
 		</div>
 	);
 	return (
-		<Link href={`/products/${product.userDefinedId}`}>
+		<Link href={product.url}>
 			<a className={styles['card-bkg']}>
 				<div className={styles.hover}>
 					<span>
