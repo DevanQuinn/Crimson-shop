@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { useEffect, useState } from 'react';
 
-const useVisible = element => {
+const useVisible: FC<any> = element => {
 	const [isVisible, setIsVisible] = useState(null);
 
 	useEffect(() => {

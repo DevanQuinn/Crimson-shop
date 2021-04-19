@@ -2,8 +2,9 @@ import { SiTiktok } from 'react-icons/si';
 import { FiInstagram } from 'react-icons/fi';
 import { ImYoutube } from 'react-icons/im';
 import Link from 'next/link';
+import { FC } from 'react';
 
-const Footer = ({ styles }): JSX.Element => {
+const Footer: FC<{ styles }> = ({ styles }) => {
 	const socialStyle = { width: '2em', height: 'auto' };
 
 	return (

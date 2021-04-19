@@ -3,8 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowRightCircle } from 'react-icons/fi';
 import useInStock from '../hooks/useInStock';
+import { FC } from 'react';
+import { productType } from '../types';
 
-const Card = ({ product }): JSX.Element => {
+const Card: FC<{ product: productType }> = ({ product }) => {
 	const [inStock] = useInStock(product);
 	const noStock = (
 		<div className={styles['no-stock']}>

@@ -1,7 +1,9 @@
+import { FC } from 'react';
 import styles from '../styles/Card.module.css';
 import Card from './Card';
+import { productType } from '../types';
 
-const CardGrid = ({ products }): JSX.Element => {
+const CardGrid: FC<{ products: productType[] }> = ({ products }) => {
 	return (
 		<div className={styles.grid}>
 			{products.map((item, idx) => {

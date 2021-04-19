@@ -1,9 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { FC } from 'react';
 
-const NavLink = ({ children, href }) => {
+const NavLink: FC<{ children: JSX.Element; href: string }> = ({
+	children,
+	href,
+}) => {
 	const path = useRouter().pathname;
 	return (
 		<>
@@ -31,7 +33,5 @@ const NavLink = ({ children, href }) => {
 		</>
 	);
 };
-
-NavLink.propTypes = {};
 
 export default NavLink;

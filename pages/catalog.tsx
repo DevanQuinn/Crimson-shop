@@ -1,9 +1,10 @@
 import CardGrid from '../components/CardGrid';
-import server from '../server';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 const btoa = require('btoa');
+import { FC } from 'react';
+import { productType } from '../types';
 
-const Catalog = ({ products }): JSX.Element => {
+const Catalog: FC<{ products: productType[] }> = ({ products }) => {
 	return (
 		<>
 			<h1 className='heading-title'> Catalog</h1>
@@ -14,7 +15,7 @@ const Catalog = ({ products }): JSX.Element => {
 
 export default Catalog;
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 	const res = await fetch('https://app.snipcart.com/api/products', {
 		headers: {
 			Authorization: `Basic ${btoa(process.env.SNIPCART_API_KEY)}`,

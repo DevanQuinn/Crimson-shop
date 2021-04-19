@@ -1,3 +1,11 @@
+import CSS from 'csstype';
+
+interface buttonInterface {
+	children: JSX.Element;
+	onClick?: () => void;
+	buttonStyle: CSS.Properties;
+}
+
 const Button = ({ children, onClick = null, buttonStyle = null }) => {
 	return (
 		<div>

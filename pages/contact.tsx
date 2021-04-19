@@ -1,10 +1,10 @@
 import styles from '../styles/contact.module.css';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import server from '../server';
 
-const contact = (): JSX.Element => {
-	const contactFormJsx = (
+const contact: FC = () => {
+	const contactFormJsx: JSX.Element = (
 		<>
 			<h1 className='heading-title'>Contact</h1>
 			<form
@@ -24,7 +24,7 @@ const contact = (): JSX.Element => {
 		</>
 	);
 	const { submitted } = useRouter().query;
-	const [pageData, setPageData] = useState(contactFormJsx);
+	const [pageData, setPageData] = useState<JSX.Element>(contactFormJsx);
 	useEffect(() => {
 		if (submitted)
 			setPageData(

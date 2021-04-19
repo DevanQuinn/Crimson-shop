@@ -1,4 +1,6 @@
-const privacy = (): JSX.Element => {
+import { FC } from 'react';
+
+const privacy: FC = () => {
 	return (
 		<div style={{ margin: '25px' }}>
 			<h2>Privacy Policy</h2>

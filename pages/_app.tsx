@@ -1,13 +1,13 @@
 import '../styles/globals.css';
 import Layout from '../Layout';
-import { useEffect } from 'react';
+import { FC } from 'react';
 
-function MyApp({ Component, pageProps }) {
+const MyApp: FC<{ Component; pageProps }> = ({ Component, pageProps }) => {
 	return (
 		<Layout>
 			<Component {...pageProps} />
 		</Layout>
 	);
-}
+};
 
 export default MyApp;

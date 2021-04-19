@@ -1,6 +1,11 @@
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
+import { productType } from '../types';
 
-const AddToCart = ({ info, inStock, optional = null }): JSX.Element => {
+const AddToCart: FC<{
+	info: { id: string | string[]; product: productType };
+	inStock: any;
+	optional: any;
+}> = ({ info, inStock, optional = null }) => {
 	const buttonRef = useRef(null);
 	const attr = {
 		'data-item-id': info.id,

@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 import { BsArrowRightShort } from 'react-icons/bs';
-import Button from '../components/Button';
+import { FC } from 'react';
 
-const Home = (): JSX.Element => {
+const Home: FC = () => {
 	return (
 		<>
 			<div className={styles['header-wrapper']}>

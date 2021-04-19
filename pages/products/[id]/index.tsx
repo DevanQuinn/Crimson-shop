@@ -1,5 +1,5 @@
 const btoa = require('btoa');
-import { useState } from 'react';
+import { useState, FC } from 'react';
 import { useRouter } from 'next/router';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import Link from 'next/link';
@@ -9,8 +9,12 @@ import useInStock from '../../../hooks/useInStock';
 import AddToCart from '../../../components/AddToCart';
 import { BiArrowBack } from 'react-icons/bi';
 import RelatedGrid from '../../../components/RelatedGrid';
+import { productType } from '../../../types';
 
-const item = ({ featuredProduct, products }): JSX.Element => {
+const item: FC<{ featuredProduct: productType; products: productType[] }> = ({
+	featuredProduct,
+	products,
+}) => {
 	const router = useRouter();
 	const { id } = router.query;
 	const [inStock] = useInStock(featuredProduct);
@@ -19,10 +23,10 @@ const item = ({ featuredProduct, products }): JSX.Element => {
 		if (!featuredProduct.variants.length) return null;
 		return firstSize[0].variation[0].option;
 	};
-	const [selectedSize, setSelectedSize] = useState(() =>
+	const [selectedSize, setSelectedSize] = useState<string>(() =>
 		getFirstAvailableSize()
 	);
-	const [relatedLength, setRelatedLength] = useState(3);
+	const [relatedLength, setRelatedLength] = useState<number>(3);
 	const cartInfo = {
 		info: { id, product: featuredProduct },
 		optional: {
@@ -133,7 +137,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		},
 	});
 	const catalog = await res.json();
-	const ids = catalog.items.map(item => item.userDefinedId);
+	const ids = catalog.items.map(product => product.userDefinedId);
 	const paths = ids.map(id => {
 		return {
 			params: { id: id.toString() },

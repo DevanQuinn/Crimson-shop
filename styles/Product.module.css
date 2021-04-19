@@ -99,5 +99,8 @@
 		z-index: 5;
 		width: 2.5em;
 		color: var(--background-color-old);
+		-webkit-transform: translate3d(0, 0, 0);
+		-o-transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0);
 	}
 }

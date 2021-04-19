@@ -2,12 +2,11 @@ import Link from 'next/link';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { useRef } from 'react';
 import useVisible from '../hooks/useVisible';
-import { useRouter } from 'next/router';
 import NavLink from '../components/NavLink';
+import { FC } from 'react';
 
-const Nav = ({ styles }): JSX.Element => {
-	const path = useRouter().pathname;
-	const titleRef = useRef(null);
+const Nav: FC<{ styles }> = ({ styles }): JSX.Element => {
+	const titleRef = useRef();
 	const isVisible = useVisible(titleRef);
 
 	return (

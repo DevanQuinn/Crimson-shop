@@ -1,13 +1,21 @@
-import PropTypes from 'prop-types';
+import { FC } from 'react';
 import styles from '../styles/RelatedGrid.module.css';
 import Card from './Card';
+import { productType } from '../types';
 
-const RelatedGrid = ({
+interface gridInterface {
+	products: productType[];
+	featuredId: string;
+	length?: number;
+	handleLoadMore: () => void;
+}
+
+const RelatedGrid: FC<gridInterface> = ({
 	products,
 	featuredId,
 	length = 3,
 	handleLoadMore,
-}): JSX.Element => {
+}) => {
 	return (
 		<div className={styles.wrapper}>
 			<h2 className={styles.title}>WHY NOT BUY ONE OF THESE TOO?</h2>
@@ -28,12 +36,6 @@ const RelatedGrid = ({
 			)}
 		</div>
 	);
-};
-
-RelatedGrid.propTypes = {
-	products: PropTypes.array.isRequired,
-	featuredId: PropTypes.string.isRequired,
-	length: PropTypes.number,
 };
 
 export default RelatedGrid;
